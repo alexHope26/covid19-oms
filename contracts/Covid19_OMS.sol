@@ -46,7 +46,7 @@ contract Covid19_OMS {
     function ValidacionCentrosSalud (address _centroSalud) public ExclusivaOMS(msg.sender) {
         // Otorgamiento de validez a centro de salud por parte de OMS
         AddrCentroSalud_validacion[_centroSalud] = true;
-        // Emision del evento NuevoCentroValidado
+        // Emite del evento NuevoCentroValidado
         emit NuevoCentroValidado(_centroSalud);
     }
 
@@ -58,28 +58,21 @@ contract Covid19_OMS {
         addr_contratos_salud_validos.push(addrContrato_CentroSalud);
         // Guarda el mapeo de direccion de centro de salud y la direccion de su contrato
         AddrCentroSalud_AddrContrato[msg.sender] = addrContrato_CentroSalud;
-        // Emisio del evento Nuevo Contrato
+        // Emite del evento Nuevo Contrato
         emit NuevoContrato(addrContrato_CentroSalud, msg.sender);
     }
 
-
-    // Funcion para solicitar el acceso al sistema medico 
+    //Funcion solicitar el acceso al sistema medico 
     function SolicitarAccesoSistemaMedico() public {
         // Guarda la direccion en el array de solicitudes al sistema medico 
         SolicitudesSistemaMedico.push(msg.sender);
-        // Emision evento SolicitudAcceso 
+        // Emite evento SolicitudAcceso 
         emit SolicitudAcceso (msg.sender);
     }
     
-    // Funcion que visualiza las direcciones que han solicitado este acceso 
-    function VisualizarSolicitudes() public view ExclusivaOMS(msg.sender) returns (address [] memory){
+    //Funcion visualizar las direcciones que han solicitado este acceso 
+    function VisorSolicitudes() public view ExclusivaOMS(msg.sender) returns (address [] memory){
         return SolicitudesSistemaMedico;
     }
-    
-
-    
-    
-    
-    
-    
+      
 }
