@@ -25,7 +25,7 @@ contract CentroSalud {
 
 
     // Mapping de relacion entre el id de la persona con el resultado
-    mapping (bytes8 => InfoResultados) ResultadosCOVID;
+    mapping (uint256 => InfoResultados) ResultadosCOVID;
     
     //Exclusivo para el centro de salud 
     modifier ExclusivoCentroSalud(address _addrCentroSalud){
@@ -34,7 +34,7 @@ contract CentroSalud {
     }
 
     //Funcion para expedicion de resultados de prueba COVID por centro de salud
-    function ExpedicionResultadosCovid19(bytes8 _idPersona,bool _resultadoCovid) public ExclusivoCentroSalud(msg.sender){
+    function ExpedicionResultadosCovid19(uint256 _idPersona,bool _resultadoCovid) public ExclusivoCentroSalud(msg.sender){
         //Obtiene el timestamp del bloque
         uint256 _tiempo = block.timestamp;
         //Almacena en Mapping el ID persona y el timestamp
@@ -44,7 +44,7 @@ contract CentroSalud {
 
 
     //Funcion para la Consulta de resultados por el ID de persona (idPersona de 8 bytes)
-    function ConsultaResultados(bytes8 _idPersona)public view returns(string memory _resultadoPruebaCOVID19, uint256 _time){
+    function ConsultaResultados(uint256 _idPersona)public view returns(string memory _resultadoPruebaCOVID19, uint256 _time){
     //Resultado de la prueba en texto legible 
     string memory resultado;
     resultado = ResultadosCOVID[_idPersona].resultadoMuestra == true ? "Positivo" : "Negativo";
